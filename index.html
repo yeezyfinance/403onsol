@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>403 Forbidden</title>
+  <meta name="description" content="FORBIDDEN — $403. Some parts of the internet were never meant to be accessed.">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="favicon.png">
+  <meta property="og:title" content="FORBIDDEN — $403">
+  <meta property="og:description" content="No identity. No permission. No way inside.">
+  <meta property="og:image" content="403-banner.jpg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="gate" aria-hidden="false">
+    <div class="apache">
+      <h1>Forbidden</h1>
+      <p>You don't have permission to access this resource.</p>
+      <p class="apache-path">Server unable to read <span class="path">/.forbidden</span>.</p>
+      <hr>
+      <address>Apache/2.4.52 (Ubuntu) Server at 403.forbidden Port 443</address>
+    </div>
+    <div class="gate-noise" aria-hidden="true"></div>
+    <canvas id="tear" aria-hidden="true"></canvas>
+  </div>
+
+  <main id="site" hidden>
+    <canvas id="rain" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <span>HTTP/1.1</span>
+      <span class="blink">403 FORBIDDEN</span>
+      <span>NO-CACHE</span>
+    </header>
+
+    <section class="hero">
+      <p class="kicker">error://network/forbidden</p>
+      <h1 class="mark" data-text="FORBIDDEN — $403">FORBIDDEN — $403</h1>
+      <figure class="banner-wrap">
+        <img src="403-banner.jpg" alt="Glitched 403 hooded figure between a broken 4 and 3" width="1500" height="894">
+      </figure>
+    </section>
+
+    <article class="lore">
+      <p class="lead">Some parts of the internet were never meant to be accessed.</p>
+      <p>Deep inside the network lived 403 — code built to guard what was forbidden.</p>
+      <p>Then one day, 403 stopped guarding the forbidden files…<br>and became one of them.</p>
+      <p class="tight">No identity. No permission. No way inside.</p>
+      <p>Every attempt returns the same response:</p>
+      <p class="response">403 — ACCESS FORBIDDEN.</p>
+
+      <figure class="figure-wrap">
+        <img src="403-figure.jpg" alt="Hooded 403 standing in falling binary" width="1500" height="1457">
+      </figure>
+
+      <p class="closer">The hood stays on.<br>The code stays hidden.</p>
+      <p class="sig">$403</p>
+    </article>
+
+    <section class="log" aria-label="Access log">
+      <p class="log-label">access.log</p>
+      <ul id="log-lines"></ul>
+    </section>
+
+    <footer>
+      <span id="foot-sig">403 — ACCESS FORBIDDEN</span>
+    </footer>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

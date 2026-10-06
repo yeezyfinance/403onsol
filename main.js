@@ -100,6 +100,7 @@
     site.hidden = false;
     paintLog();
     startRain();
+    loadCa();
     setTimeout(function () {
       gate.remove();
     }, 800);
@@ -131,6 +132,62 @@
   }
 
   gate.addEventListener("click", breakGate);
+
+  function loadCa() {
+    var button = document.getElementById("ca");
+    var wait = document.getElementById("ca-wait");
+    var hint = document.getElementById("ca-hint");
+    var wrap = document.getElementById("chart-wrap");
+    var frame = document.getElementById("chart");
+    var link = document.getElementById("chart-link");
+    fetch("ca.txt?t=" + Date.now(), { cache: "no-store" })
+      .then(function (res) { return res.ok ? res.text() : ""; })
+      .then(function (text) {
+        var ca = "";
+        text.split(/\r?\n/).forEach(function (line) {
+          line = line.trim();
+          if (!ca && line && line.charAt(0) !== "#") ca = line.split(/\s+/)[0];
+        });
+        if (!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(ca)) return;
+        button.hidden = false;
+        button.textContent = ca;
+        wait.hidden = true;
+        hint.hidden = false;
+        button.addEventListener("click", function () {
+          var done = function () {
+            button.classList.add("copied");
+            hint.textContent = "copied";
+            setTimeout(function () {
+              button.classList.remove("copied");
+              hint.textContent = "click to copy";
+            }, 1200);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(ca).then(done).catch(function () {
+              fallbackCopy(ca);
+              done();
+            });
+          } else {
+            fallbackCopy(ca);
+            done();
+          }
+        });
+        var chart = "https://dexscreener.com/solana/" + ca + "?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=1&chartType=usd&interval=15";
+        frame.src = chart;
+        link.href = "https://dexscreener.com/solana/" + ca;
+        wrap.hidden = false;
+      })
+      .catch(function () {});
+  }
+
+  function fallbackCopy(value) {
+    var area = document.createElement("textarea");
+    area.value = value;
+    document.body.appendChild(area);
+    area.select();
+    try { document.execCommand("copy"); } catch (err) {}
+    area.remove();
+  }
 
   window.addEventListener("resize", function () {
     if (revealed && !reduced) sizeCanvas(rain);

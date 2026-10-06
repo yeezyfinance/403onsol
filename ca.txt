@@ -1,0 +1,2 @@
+# Paste the contract address on the next line. One address, nothing else.
+# Comments starting with # are ignored.
